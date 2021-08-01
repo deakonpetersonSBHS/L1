@@ -1,0 +1,54 @@
+<!doctpe html>
+<head>
+   <title>Canvas Tutorial</title>
+   <head>
+<body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas , canvasContext;
+        
+        window.onload = function(){
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+             
+            document. addEventListener('keydown', keyPressed);
+            document. addEventListener('keyup', keyReleased);
+            
+            setInterval(mainloop, 1000/50)
+            
+        }
+            var SIZE = 20;
+            var ballXpos = 0;
+            var ballYpos = 0;
+            var ballXspeed = 5;
+            var ballYspeed = 5;
+            
+        const RIGHT KEY = 39
+        
+        function mainloop(){
+          colorRect(0,0,canvas.width,canvas.height,'black');
+          colorRect(0,0,20,20,'red');
+           
+            
+        }
+        function playermove(){
+            if(rightKeyPressed)
+        }
+        
+        function keyPressed(evt){
+            console.log(evt.keycode)
+            if(evt.keycode==37){
+                rightKeypressed = true;
+            }
+        }
+        
+        function colorRect(x,y,w,h,c){
+            canvasContext.fillStyle = c;
+        canvasContext.fillRect(x,y,w,h,);
+        }
+        
+       
+        
+        <input type="text" onkeypress="myFunction()">
+    </script>
+       </body>
