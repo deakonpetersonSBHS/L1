@@ -1,54 +1,65 @@
 <!doctpe html>
-<head>
-   <title>Canvas Tutorial</title>
-   <head>
-<body>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <script>
-        var canvas , canvasContext;
-        
-        window.onload = function(){
-            canvas = document.getElementById('gameCanvas');
-            canvasContext = canvas.getContext('2d');
-             
-            document. addEventListener('keydown', keyPressed);
-            document. addEventListener('keyup', keyReleased);
-            
-            setInterval(mainloop, 1000/50)
-            
-        }
-            var SIZE = 20;
-            var ballXpos = 0;
-            var ballYpos = 0;
-            var ballXspeed = 5;
-            var ballYspeed = 5;
-            
-        const RIGHT KEY = 39
-        
-        function mainloop(){
-          colorRect(0,0,canvas.width,canvas.height,'black');
-          colorRect(0,0,20,20,'red');
-           
-            
-        }
-        function playermove(){
-            if(rightKeyPressed)
-        }
-        
-        function keyPressed(evt){
-            console.log(evt.keycode)
-            if(evt.keycode==37){
-                rightKeypressed = true;
-            }
-        }
-        
-        function colorRect(x,y,w,h,c){
-            canvasContext.fillStyle = c;
-        canvasContext.fillRect(x,y,w,h,);
-        }
-        
-       
-        
-        <input type="text" onkeypress="myFunction()">
-    </script>
-       </body>
+
+    <head>
+        <title>Canvas Tutorial</title>
+
+        <head>
+
+        <body>
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <script>
+                var canvas, canvasContext;
+
+                window.onload = function() {
+                    canvas = document.getElementById('gameCanvas');
+                    canvasContext = canvas.getContext('2d');
+
+//                    document.addEventListener('keydown', keyPressed);
+//                    document.addEventListener('keyup', keyReleased);
+
+                    setInterval(mainloop, 1000 / 50)
+
+                }
+
+                var playerXpos = 0;
+                var playerYpos = 0;
+                var playerXspeed = 5;
+                var playerYspeed = 5;
+                var SIZE = 20;
+
+                const RIGHT_KEY = 39;
+                var rightKeyPressed = false;
+
+                function mainloop() {
+                    colorRect(0, 0, canvas.width, canvas.height, 'black');
+                    colorRect(playerXpos, playerYpos, SIZE, SIZE, 'red');
+
+
+                }
+                //        function playermove(){
+                //            if(rightKeyPressed){
+                //                
+                //            }
+                //        }
+                //        
+                //        function keyPressed(evt){
+                //            console.log(evt.keyCode)
+                //            if(evt.keyCode == RIGHT_KEY){
+                //                rightKeyPressed = true;
+                //            }
+                //        }
+                //        
+                //        function keyReleased(evt){
+                //            console.log(evt.keyCode)
+                //            if(evt.keyCode == RIGHT_KEY){
+                //                rightKeyPressed = false;
+                //            }
+                //        }
+
+                function colorRect(x, y, w, h, c) {
+                    canvasContext.fillStyle = c;
+                    canvasContext.fillRect(x, y, w, h, );
+                }
+
+            </script>
+        </body>
