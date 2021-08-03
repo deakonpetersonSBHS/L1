@@ -27,10 +27,15 @@
                 var playerYspeed = 5;
                 var SIZE = 20;
 
-                const RIGHT_KEY = 39;
-                var rightKeyPressed = false;
                 const LEFT_KEY = 37;
+                const RIGHT_KEY = 39;
+                const UP_KEY = 38;
+                const DOWN_KEY = 40;
+                var rightKeyPressed = false;
                 var leftKeyPressed = false;
+                var downKeyPressed = false;
+                var upKeyPressed = false;
+
 
 
                 function mainloop() {
@@ -44,8 +49,18 @@
                     if (rightKeyPressed) {
                         playerXpos += playerXspeed;
                     }
+                    if (leftKeyPressed) {
+                        playerXpos -= playerXspeed;
+                    }
+                    if (downKeyPressed) {
+                        playerYpos += playerYspeed;
+                    }
+                    if (upKeyPressed) {
+                        playerYpos -= playerYspeed;
+                    }
                 }
-
+            
+                
                 function keyPressed(evt) {
                     console.log(evt.keyCode)
                     if (evt.keyCode == RIGHT_KEY) {
@@ -53,6 +68,13 @@
                     }
                     if (evt.keyCode == LEFT_KEY) {
                         leftKeyPressed = true;
+                    }
+                    if (evt.keyCode == DOWN_KEY) {
+                        downKeyPressed = true;
+                       
+                    }
+                    if (evt.keyCode == UP_KEY) {
+                        upKeyPressed = true;
                     }
                 }
 
@@ -63,6 +85,13 @@
                     if (evt.keyCode == LEFT_KEY) {
                         leftKeyPressed = false;
                     }
+                     if (evt.keyCode == DOWN_KEY) {
+                        downKeyPressed = false;
+                    } 
+                    if (evt.keyCode == UP_KEY) {
+                        upKeyPressed = false;
+                    }
+                    
                 }
 
                 function colorRect(x, y, w, h, c) {
