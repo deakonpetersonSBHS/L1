@@ -1,4 +1,4 @@
-<!doctpe html>
+<!doctype html>
 
     <head>
         <title>Canvas Tutorial</title>
@@ -25,7 +25,14 @@
                 var playerYpos = 0;
                 var playerXspeed = 5;
                 var playerYspeed = 5;
-                var SIZE = 20;
+                var PLAYER_SIZE = 10;
+                
+                var enemyXpos = 0;
+                var enemyYpos = 0;
+                var enemyXspeed = 5;
+                var enemyYspeed = 5;
+                var ENEMY_SIZE = 20;
+                
 
                 const LEFT_KEY = 37;
                 const RIGHT_KEY = 39;
@@ -40,9 +47,23 @@
 
                 function mainloop() {
                     colorRect(0, 0, canvas.width, canvas.height, 'black');
-                    colorRect(playerXpos, playerYpos, SIZE, SIZE, 'red');
-
+                    colorRect(playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE, 'blue');
+                    colorRect(enemyXpos,enemyYpos,ENEMY_SIZE,ENEMY_SIZE,'red')
+                    
                     playermove();
+                   
+                    enemyMove();
+                }
+                
+                
+                function enemyMove(){
+                    enemyXpos += enemyXspeed;
+                    
+                    if(enemyXpos > canvas.width){
+                        enemyXpos = 0 - ENEMY_SIZE;
+                        enemyYpos = Math.floor(Math.random()*(canvas.height - ENEMY_SIZE));
+                    }
+                   
                 }
 
                 function playermove() {
