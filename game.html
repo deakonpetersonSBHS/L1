@@ -6,8 +6,10 @@
         <head>
 
         <body>
-            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <canvas id="gameCanvas" width="500" height="500"></canvas>
+            
             <script>
+                
                 var canvas, canvasContext;
 
                 window.onload = function() {
@@ -25,12 +27,12 @@
                 var playerYpos = 0;
                 var playerXspeed = 5;
                 var playerYspeed = 5;
-                var PLAYER_SIZE = 10;
+                var PLAYER_SIZE = 15;
                 
                 var enemyXpos = 0;
                 var enemyYpos = 0;
-                var enemyXspeed = 5;
-                var enemyYspeed = 5;
+                var enemyXspeed = 6;
+                var enemyYspeed = 6;
                 var ENEMY_SIZE = 20;
                 
 
@@ -43,28 +45,118 @@
                 var downKeyPressed = false;
                 var upKeyPressed = false;
 
-
-
+                var score = 0;
+                var totalEnemies = 10
+                var  enemies = [];
+                
+                var enemy = new Image();
+                enemy.src = 'enemy.png';
+                
+                var enemy1 = new Image();
+                enemy1.src = 'enemy1.png';
+                   
+                var enemy2 = new Image();
+                enemy2.src = 'enemy2.png';
+                
+                var enemy3 = new Image();
+                enemy3.src = 'enemy3.png';
+                
+                var enemy4 = new Image();
+                enemy4.src = 'enemy4.png';
+                
+                 var starting = true;
+                
+                var enemyPics = [enemy, enemy1, enemy2, enemy3, enemy4];      
+                
                 function mainloop() {
-                    colorRect(0, 0, canvas.width, canvas.height, 'black');
+                    colorRect(0, 0, canvas.width, canvas.height, 'canvas.png');
                     colorRect(playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE, 'blue');
-                    colorRect(enemyXpos,enemyYpos,ENEMY_SIZE,ENEMY_SIZE,'red')
+                    
+//                    colorRect(enemyXpos,enemyYpos,ENEMY_SIZE,ENEMY_SIZE,'red')
+                 
                     
                     playermove();
-                   
+                    
                     enemyMove();
+                    enemydraw();
+                                        
+                     
+               if (starting) {
+                for (var i =0; i < totalEnemies; i++) {
+                    makeEnemy();
                 }
+                   starting= false;
+                }
+            }
+            
+            function enemydraw() {
+                enemies.forEach(function(e, i, array) {
+                    drawimg(e.img,e.enemyXpos, e.enemyYpos, e.ENEMY_SIZE, e.ENEMY_SIZE);
+//                var enemyXpos = 0;
+//                var enemyYpos = Math.floor(Math.random()*(canvas.height - ENEMY_SIZE));
+//                var enemyXspeed = 6;
+//                var enemyYspeed = 6;
+                
+                });
+            }
+                
+            function makeEnemy(){
+                var ENEMY_SIZE = 40;
+                var enemyXpos = 0;
+                var enemyYpos = Math.floor(Math.random()*(canvas.height - ENEMY_SIZE));
+                var enemyXspeed = 6;
+                var enemyYspeed = 6;
+                var picRand = Math.floor(Math.random()*5);
+                var img = enemyPics[picRand];
+                
+                var enemy = {
+                    img: img,
+                    enemyXpos: enemyXpos,
+                    enemyYpos: enemyYpos,
+                    ENEMY_SIZE: ENEMY_SIZE,
+                    enemyXspeed: enemyXspeed,
+                    enemyYspeed: enemyYspeed
+                }
+                
+                enemies.push(enemy);
+            }
+                
+//                function drawEnemy(){
+//                    enemies.forEach(function(enemy, i){
+// colorRect(enemy.enemyXpos,enemy.enemyYpos,enemy.ENEMY_SIZE,enemy.ENEMY_SIZE,)
+//                 
+//                    });
+//                    
+//                }
+//                
+                
+                
+                
                 
                 
                 function enemyMove(){
-                    enemyXpos += enemyXspeed;
+                    enemies.forEach(function(enemy){
+                        
                     
-                    if(enemyXpos > canvas.width){
-                        enemyXpos = 0 - ENEMY_SIZE;
-                        enemyYpos = Math.floor(Math.random()*(canvas.height - ENEMY_SIZE));
+                    enemy.enemyXpos += enemy.enemyXspeed;
+                    
+                    if(enemy.enemyXpos > canvas.width){
+                        enemy.enemyXpos = 0 - enemy.ENEMY_SIZE;
+                        
+                         enemy.enemyYpos= Math.floor(Math.random() *3) + 1;
+//                        enemy.enemyYpos = enemyPos * (canvas.width / 3);
+                        enemy.enemyXspeed = Math.floor(Math.random() * (12 - 4) + 4);
+                
                     }
-                   
-                }
+                   if(enemy.enemyXpos + enemy.ENEMY_SIZE > playerXpos &&  enemy.enemyXpos < playerXpos + PLAYER_SIZE && enemy.enemyYpos + enemy.ENEMY_SIZE > playerYpos && enemy.enemyYpos < playerYpos + PLAYER_SIZE){
+                       playerYpos = 0;
+                       playerXpos = canvas.width - PLAYER_SIZE;
+                       score++;
+                       console.log('score:' + score);
+                   }
+               });
+         }
+               
 
                 function playermove() {
                     if (rightKeyPressed) {
@@ -91,8 +183,7 @@
                         leftKeyPressed = true;
                     }
                     if (evt.keyCode == DOWN_KEY) {
-                        downKeyPressed = true;
-                       
+                        downKeyPressed = true; 
                     }
                     if (evt.keyCode == UP_KEY) {
                         upKeyPressed = true;
@@ -114,7 +205,11 @@
                     }
                     
                 }
-
+                
+                function drawimg(src, x, y, w, h ) {
+                    canvasContext.drawImage(src, x, y, w, h);
+                }
+                
                 function colorRect(x, y, w, h, c) {
                     canvasContext.fillStyle = c;
                     canvasContext.fillRect(x, y, w, h, );
